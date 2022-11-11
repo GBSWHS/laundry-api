@@ -1,10 +1,19 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from '@nestjs/common'
+import { ScheduleModule } from '@nestjs/schedule'
+import { WasherModule } from './washer/washer.module'
+import { ReserveModule } from './reserve/reserve.module'
+import { SmartthingsModule } from './smartthings/smartthings.module'
+import { ConfigModule } from '@nestjs/config'
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    ScheduleModule.forRoot(),
+    WasherModule,
+    ReserveModule,
+    SmartthingsModule
+  ]
 })
 export class AppModule {}
